@@ -1,41 +1,67 @@
-# Titre
+# Simple script to sens midi from NodeJs
 
-## Hardware et Software
-- Arduino Uno
-- petit montage électrique
-- MadMapper
-- (Midi-OX)[http://www.midiox.com]
-- (LoopMidi)[https://www.tobias-erichsen.de/software/loopmidi.html]
-- IDE Arduino
-- VSCode
-- NodeJs
-- easyMidi
-- express
+there is an exemple of how sending midi signal with a web page.
 
-## Preparation de l'environnement de travail
-### Madmapper
-- creation DMX virtuel
+
+## Install 
+
+You need to install NodeJs, express and easymidi.
+
+```
+mkdir Project
+cd Project
+npm init
+npm install express
+npm install easymidi
+```
+
+To complete the operation, install [LoopMidi](https://www.tobias-erichsen.de/software/loopmidi.html). It will create a virtual MIDI Controller
+![LoopMidi](https://i.imgur.com/VDTLX2X.png)
+
+AND
+
+Install [Midi-OX](http://www.midiox.com/). It helps you to check logs from Midi signal.
+
+--- 
+
+## Configure
+
 ### LoopMidi
-- Création d'un peripherique MIDI virtuel
+Start LoopMidi and create a virtual midi controller
 
 ### Midi-OX
-- Liaison loopMidi pour contrôle 
+Start midi-OX and link loopMidi with
 
-## Installation de Firmata dans le Arduino Uno
-- selection script
-- compile et envoie
+### Main.js
+Remplace the name of vitual midi device into main.js at line 3
 
-## Communication MadMapper et Arduino Uno
-- création module firmata
-- selection port et model
+``` 
+let output = new easymidi.Output("HERE THE NAME OF THE DEVICE") 
+```
 
-## Communication NodeJs et MadMapper
-- création script NodeJS et easy midi
-- test avec Midi-OX
-- création page web express
+---
 
-## Parametrage d'action midi sur MadMapper
-- MadMapper -> bouton learn
+## Start
 
-## cablage
-![](https://www.robotique.tech/wp-content/uploads/2020/06/Arduino-led_bb.png)
+Start the script main.js to display the web page.
+```
+node mais.js
+```
+
+And go to [localhost:3000](http://localhost:3000)
+
+Each time you click on the "on/off" button, you send a midi signal that can be check in Midi-OX monitor
+
+![monitor](https://res.cloudinary.com/practicaldev/image/fetch/s--0W2RUksL--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://i.imgur.com/kGJHXr6.png)
+
+The signal is start by easymidi, thought Loopmidi and catch by Midi-OX
+
+---
+
+## Source
+
+Checkout the [easymidi documentation](https://github.com/dinchak/node-easymidi) to see all your possibilities.
+
+You can see how it used with this [video](https://www.youtube.com/watch?v=vW2Lve_hMzg) 
+
+Enjoy !
